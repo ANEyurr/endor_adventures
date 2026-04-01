@@ -1,0 +1,50 @@
+<!-- fastpass/templates/fastpass/guest_login.html -->
+{% extends 'fastpass/base.html' %}
+ 
+{% block title %}Guest Login{% endblock %}
+ 
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 0 auto;">
+    <h2>🎫 FastPass Login</h2>
+    <p>Enter your email to view and book FastPasses.</p>
+    
+    {% if messages %}
+        {% for message in messages %}
+        <div class="message {% if message.tags == 'error' %}message-error{% elif message.tags == 'success' %}message-success{% else %}message-info{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    
+    <form method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+        
+        <div style="margin-bottom: 15px;">
+            <label for="id_email" style="display: block; margin-bottom: 5px;">
+                Email Address
+            </label>
+            {{ form.email }}
+        </div>
+        
+        <button type="submit" style="
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        ">Find My Account</button>
+    </form>
+</div>
+ 
+<style>
+    .form-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+</style>
+{% endblock %}
